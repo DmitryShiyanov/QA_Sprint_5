@@ -27,15 +27,15 @@ class TestRegistration:
         except TimeoutException:
             assert False
 
-    # @pytest.mark.parametrize('password', [' ', 1, 123, 12345])
-    # def test_create_account_with_short_pass_failure(self, chrome, password):
-    #     chrome.get(Constants.MAIN_URL)
-    #     chrome.find_element(*MainLocators.LOGIN_ACCOUNT_BUTTON).click()
-    #     WebDriverWait(chrome, 3).until(
-    #         expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Зарегистрироваться")))
-    #     chrome.find_element(*MainLocators.REGISTRATION_HREF).click()
-    #     chrome.find_element(*MainLocators.NAME_FIELD).send_keys(Constants.NAME)
-    #     chrome.find_element(*MainLocators.EMAIL_FIELD).send_keys(Constants.RANDOM_MAIL)
-    #     chrome.find_element(*MainLocators.PASSWORD_FIELD).send_keys(password)
-    #     chrome.find_element(*MainLocators.REGISTRATION_BUTTON).click()
-    #     assert chrome.find_element(*MainLocators.ERROR_TEXT).text == 'Некорректный пароль'
+    @pytest.mark.parametrize('password', [' ', 1, 123, 12345])
+    def test_create_account_with_short_pass_failure(self, chrome, password):
+        chrome.get(Constants.MAIN_URL)
+        chrome.find_element(*MainLocators.LOGIN_ACCOUNT_BUTTON).click()
+        WebDriverWait(chrome, 3).until(
+            expected_conditions.element_to_be_clickable((By.LINK_TEXT, "Зарегистрироваться")))
+        chrome.find_element(*MainLocators.REGISTRATION_HREF).click()
+        chrome.find_element(*MainLocators.NAME_FIELD).send_keys(Constants.NAME)
+        chrome.find_element(*MainLocators.EMAIL_FIELD).send_keys(Constants.RANDOM_MAIL)
+        chrome.find_element(*MainLocators.PASSWORD_FIELD).send_keys(password)
+        chrome.find_element(*MainLocators.REGISTRATION_BUTTON).click()
+        assert chrome.find_element(*MainLocators.ERROR_TEXT).text == 'Некорректный пароль'
